@@ -12,6 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
+version= "${mod_version}"
 group = "com.${author}.${modname}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "${modname}"
 
@@ -54,7 +55,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                lavuestia {
                     source sourceSets.main
                 }
             }
@@ -76,7 +77,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                lavuestia {
                     source sourceSets.main
                 }
             }
@@ -98,14 +99,25 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'lavuestia', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                examplemod {
+                lavuestia {
                     source sourceSets.main
                 }
             }
         }
+    }
+}
+
+repositories {
+    maven { // JEI
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven { // TOP
+        name 'tterrag maven'
+        url "https://maven.tterrag.com/"
     }
 }
 
@@ -136,6 +148,14 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+    // compile against the JEI API but do not include it at runtime
+     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
+    // at runtime, use the full JEI jar
+     runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
+
+    implementation fg.deobf(project.dependencies.create("mcjty.theoneprobe:TheOneProbe-${top_version}") {
+        transitive = false
+    })
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -146,7 +166,7 @@ jar {
             "Specification-Vendor": "${author}",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
+            "Implementation-Version": "${mod_version}",
             "Implementation-Vendor" :"${author}",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
