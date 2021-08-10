@@ -1,18 +1,18 @@
 package com.fanrende.lavuestia.blocks.infuser;
 
-import com.fanrende.lavuestia.data.CapabilityContainerItemHandler;
 import com.fanrende.lavuestia.setup.Registration;
-import com.fanrende.lavuestia.tools.AutomationItemHandler;
 import com.fanrende.lavuestia.tools.CustomEnergyStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -25,16 +25,19 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.HashMap;
 
 public class MetalInfuserTile extends TileEntity implements ITickableTileEntity, INamedContainerProvider
 {
-	private final ItemStackHandler item = this.createItemHandler();
+	private final NonNullList<ItemStack> stacks = NonNullList.withSize(2, ItemStack.EMPTY);
+
+	private final ItemStackHandler item = this.createItemHandler(stacks);
+	private final ItemStackHandler itemAutomation = this.createAutomationItemHandler(stacks);
 	private final CustomEnergyStorage energy = this.createEnergyStorage();
 
-	private final LazyOptional<IItemHandler> itemLazy = LazyOptional.of(() -> item);
-	private final LazyOptional<IItemHandler> itemAutomationLazy = LazyOptional.of(this::createAutomationItemHandler);
+	private final LazyOptional<IItemHandler> itemAutomationLazy = LazyOptional.of(() -> itemAutomation);
 	private final LazyOptional<IEnergyStorage> energyLazy = LazyOptional.of(() -> energy);
+
+	private int counter = 100;
 
 	public MetalInfuserTile()
 	{
@@ -44,7 +47,16 @@ public class MetalInfuserTile extends TileEntity implements ITickableTileEntity,
 	@Override
 	public void tick()
 	{
+		if(counter > 0)
+			counter--;
 
+		if(counter <= 0)
+		{
+			counter = 100;
+
+			stacks.set(1, stacks.get(0));
+			stacks.set(0, ItemStack.EMPTY);
+		}
 	}
 
 	@Override
@@ -68,26 +80,63 @@ public class MetalInfuserTile extends TileEntity implements ITickableTileEntity,
 		return super.save(tag);
 	}
 
-	private ItemStackHandler createItemHandler()
+	public ItemStackHandler getItemHandler()
 	{
-		return new ItemStackHandler(2)
+		return item;
+	}
+
+	private ItemStackHandler createItemHandler(NonNullList<ItemStack> stacks)
+	{
+		return new ItemStackHandler(stacks)
 		{
 			@Override
 			protected void onContentsChanged(int slot)
 			{
 				setChanged();
 			}
+
+			@Nonnull
+			@Override
+			public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
+			{
+				if(slot == 1)
+					return stack;
+
+				return super.insertItem(slot, stack, simulate);
+			}
 		};
 	}
 
-	private AutomationItemHandler createAutomationItemHandler()
+	private ItemStackHandler createAutomationItemHandler(NonNullList<ItemStack> stacks)
 	{
-		HashMap<Integer, AutomationItemHandler.IO_TYPE> available = new HashMap<>();
+		return new ItemStackHandler(stacks)
+		{
+			@Override
+			protected void onContentsChanged(int slot)
+			{
+				setChanged();
+			}
 
-		available.put(0, AutomationItemHandler.IO_TYPE.INPUT);
-		available.put(1, AutomationItemHandler.IO_TYPE.OUTPUT);
+			@Nonnull
+			@Override
+			public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
+			{
+				if(slot == 1)
+					return stack;
 
-		return new AutomationItemHandler(item, available);
+				return super.insertItem(slot, stack, simulate);
+			}
+
+			@Nonnull
+			@Override
+			public ItemStack extractItem(int slot, int amount, boolean simulate)
+			{
+				if(slot == 0)
+					return ItemStack.EMPTY;
+
+				return super.extractItem(slot, amount, simulate);
+			}
+		};
 	}
 
 	private CustomEnergyStorage createEnergyStorage()
@@ -101,8 +150,6 @@ public class MetalInfuserTile extends TileEntity implements ITickableTileEntity,
 	{
 		if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return itemAutomationLazy.cast();
-		if(cap == CapabilityContainerItemHandler.CONTAINER_ITEM_HANDLER_CAPABILITY)
-			return itemLazy.cast();
 		if(cap == CapabilityEnergy.ENERGY)
 			return energyLazy.cast();
 

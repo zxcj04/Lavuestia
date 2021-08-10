@@ -1,6 +1,5 @@
 package com.fanrende.lavuestia.blocks.infuser;
 
-import com.fanrende.lavuestia.data.CapabilityContainerItemHandler;
 import com.fanrende.lavuestia.setup.Registration;
 import com.fanrende.lavuestia.tools.CustomEnergyStorage;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,8 +23,8 @@ public class MetalInfuserContainer extends Container
 	private final TileEntity tileEntity;
 	private final IItemHandler playerInventory;
 
-	private int playerInvIndexStart;
-	private int playerInvIndexEnd;
+	private final int playerInvIndexStart;
+	private final int playerInvIndexEnd;
 
 	public MetalInfuserContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory)
 	{
@@ -34,11 +33,10 @@ public class MetalInfuserContainer extends Container
 		this.tileEntity = world.getBlockEntity(pos);
 		this.playerInventory = new InvWrapper(playerInventory);
 
-		this.tileEntity.getCapability(CapabilityContainerItemHandler.CONTAINER_ITEM_HANDLER_CAPABILITY).ifPresent(h ->
-		{
-			addSlot(new SlotItemHandler(h, 0, 64, 24));
-			addSlot(new SlotItemHandler(h, 1, 100, 24));
-		});
+		MetalInfuserTile tile = (MetalInfuserTile) tileEntity;
+
+		addSlot(new SlotItemHandler(tile.getItemHandler(), 0, 64, 24));
+		addSlot(new SlotItemHandler(tile.getItemHandler(), 1, 100, 24));
 
 		playerInvIndexStart = this.slots.size();
 		playerInvIndexEnd = playerInvIndexStart + 36;

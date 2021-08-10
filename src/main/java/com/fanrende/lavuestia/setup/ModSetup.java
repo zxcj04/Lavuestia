@@ -2,7 +2,6 @@ package com.fanrende.lavuestia.setup;
 
 
 import com.fanrende.lavuestia.Lavuestia;
-import com.fanrende.lavuestia.data.CapabilityContainerItemHandler;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -25,8 +24,6 @@ public class ModSetup
 
 	public static void init(final FMLCommonSetupEvent event)
 	{
-		CapabilityContainerItemHandler.register();
-
 		event.enqueueWork(() ->
 		{
 
