@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "lavuestia:block/infuser/metal_infuser_block",
+    "up": "lavuestia:block/infuser/metal_infuser_block",
+    "north": "lavuestia:block/infuser/metal_infuser_block_front",
+    "south": "lavuestia:block/infuser/metal_infuser_block",
+    "east": "lavuestia:block/infuser/metal_infuser_block",
+    "west": "lavuestia:block/infuser/metal_infuser_block",
+    "particle": "lavuestia:block/infuser/metal_infuser_block_front"
+  }
+}

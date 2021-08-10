@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "lavuestia",
+  "pattern": [
+    "#x#",
+    "sos",
+    "#r#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bricks"
+    },
+    "x": {
+      "tag": "forge:ingots/brick"
+    },
+    "s": {
+      "tag": "forge:sand"
+    },
+    "r": {
+      "tag": "forge:dusts/redstone"
+    },
+    "o": {
+      "tag": "forge:obsidian"
+    }
+  },
+  "result": {
+    "item": "lavuestia:metal_infuser_block"
+  }
+}
