@@ -104,6 +104,22 @@ public class MetalInfuserContainer extends Container
 		return tileEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
 	}
 
+	public int getCounter()
+	{
+		if (tileEntity instanceof MetalInfuserTile)
+			return ( (MetalInfuserTile) tileEntity ).getCounter();
+
+		return -1;
+	}
+
+	public boolean isInfusing()
+	{
+		if (tileEntity instanceof MetalInfuserTile)
+			return ( (MetalInfuserTile) tileEntity ).getCounter() < 100;
+
+		return false;
+	}
+
 	private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx)
 	{
 		for (int i = 0; i < amount; i++)

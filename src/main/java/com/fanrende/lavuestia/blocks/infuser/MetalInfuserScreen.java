@@ -18,6 +18,15 @@ public class MetalInfuserScreen extends ContainerScreen<MetalInfuserContainer>
 		super(container, inventory, name);
 	}
 
+	protected void init()
+	{
+		super.init();
+		this.imageWidth = 180;
+		this.imageHeight = 152;
+		this.leftPos = ( this.width - this.imageWidth ) / 2;
+		this.topPos = ( this.height - this.imageHeight ) / 2;
+	}
+
 	@Override
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
 	{
@@ -37,8 +46,9 @@ public class MetalInfuserScreen extends ContainerScreen<MetalInfuserContainer>
 	{
 		GlStateManager._color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.minecraft.getTextureManager().bind(GUI);
-		int relX = ( this.width - this.imageWidth ) / 2;
-		int relY = ( this.height - this.imageHeight ) / 2;
-		this.blit(matrixStack, relX, relY, 0, 0, this.imageWidth, this.imageHeight);
+		this.blit(matrixStack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+
+		int progress = ( 100 - menu.getCounter() ) / 11;
+		this.blit(matrixStack, this.leftPos + 85, this.topPos + 27, 180, 0, progress, 10);
 	}
 }

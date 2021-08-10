@@ -44,6 +44,11 @@ public class MetalInfuserTile extends TileEntity implements ITickableTileEntity,
 		super(Registration.METALINFUSER_BLOCK_TILE.get());
 	}
 
+	public int getCounter()
+	{
+		return counter;
+	}
+
 	@Override
 	public void tick()
 	{
