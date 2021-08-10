@@ -11,20 +11,20 @@ import org.apache.logging.log4j.Logger;
 @Mod(Lavuestia.MODID)
 public class Lavuestia
 {
-    public static final String MODID = "lavuestia";
+	public static final String MODID = "lavuestia";
 
-    public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
+	public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
 
-    public static ModSetup setup = new ModSetup();
+	public static ModSetup setup = new ModSetup();
 
-    // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+	// Directly reference a log4j logger.
+	private static final Logger LOGGER = LogManager.getLogger();
 
-    public Lavuestia()
-    {
-        Registration.init();
+	public Lavuestia()
+	{
+		Registration.init();
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
-    }
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
+	}
 }

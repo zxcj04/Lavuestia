@@ -21,17 +21,6 @@ public class Recipes extends RecipeProvider
 	@Override
 	protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer)
 	{
-		ShapedRecipeBuilder.shaped(Registration.METALINFUSER_BLOCK.get())
-				.pattern("#x#")
-				.pattern("sos")
-				.pattern("#r#")
-				.define('#', Blocks.BRICKS)
-				.define('x', Tags.Items.INGOTS_BRICK)
-				.define('s', Tags.Items.SAND)
-				.define('r', Tags.Items.DUSTS_REDSTONE)
-				.define('o', Tags.Items.OBSIDIAN)
-				.group("lavuestia")
-				.unlockedBy("obsidian", InventoryChangeTrigger.Instance.hasItems(Blocks.OBSIDIAN))
-				.save(consumer);
+		ShapedRecipeBuilder.shaped(Registration.METALINFUSER_BLOCK.get()).pattern("#x#").pattern("sos").pattern("#r#").define('#', Blocks.BRICKS).define('x', Tags.Items.INGOTS_BRICK).define('s', Tags.Items.SAND).define('r', Tags.Items.DUSTS_REDSTONE).define('o', Tags.Items.OBSIDIAN).group("lavuestia").unlockedBy("obsidian", InventoryChangeTrigger.Instance.hasItems(Blocks.OBSIDIAN)).save(consumer);
 	}
 }

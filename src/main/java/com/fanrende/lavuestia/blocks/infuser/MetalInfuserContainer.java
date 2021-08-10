@@ -33,7 +33,7 @@ public class MetalInfuserContainer extends Container
 		this.tileEntity = world.getBlockEntity(pos);
 		this.playerInventory = new InvWrapper(playerInventory);
 
-		if(tileEntity instanceof MetalInfuserTile)
+		if (tileEntity instanceof MetalInfuserTile)
 		{
 			MetalInfuserTile tile = (MetalInfuserTile) tileEntity;
 

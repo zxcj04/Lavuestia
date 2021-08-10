@@ -8,7 +8,10 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.*;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
+import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.function.Function;
@@ -40,7 +43,7 @@ public class BlockStates extends BlockStateProvider
 
 		orientedBlock(Registration.METALINFUSER_BLOCK.get(), state ->
 		{
-			if(state.getValue(BlockStateProperties.POWERED))
+			if (state.getValue(BlockStateProperties.POWERED))
 				return modelBuilderPowered;
 			else
 				return modelBuilder;
@@ -52,11 +55,7 @@ public class BlockStates extends BlockStateProvider
 		getVariantBuilder(block).forAllStates(state ->
 		{
 			Direction dir = state.getValue(BlockStateProperties.FACING);
-			return ConfiguredModel.builder()
-					.modelFile(modelFunc.apply(state))
-					.rotationX(dir.getAxis() == Direction.Axis.Y ? dir.getAxisDirection().getStep() * -90 : 0)
-					.rotationY(dir.getAxis() != Direction.Axis.Y ? ( ( dir.get2DDataValue() + 2 ) % 4 ) * 90 : 0)
-					.build();
+			return ConfiguredModel.builder().modelFile(modelFunc.apply(state)).rotationX(dir.getAxis() == Direction.Axis.Y ? dir.getAxisDirection().getStep() * -90 : 0).rotationY(dir.getAxis() != Direction.Axis.Y ? ( ( dir.get2DDataValue() + 2 ) % 4 ) * 90 : 0).build();
 		});
 	}
 }

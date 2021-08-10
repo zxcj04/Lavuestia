@@ -25,10 +25,7 @@ public class MetalInfuserBlock extends Block
 {
 	public MetalInfuserBlock()
 	{
-		super(Properties.of(Material.METAL)
-				.sound(SoundType.METAL)
-				.strength(4.0f)
-				.lightLevel(state -> state.getValue(BlockStateProperties.POWERED)? 14: 0));
+		super(Properties.of(Material.METAL).sound(SoundType.METAL).strength(4.0f).lightLevel(state -> state.getValue(BlockStateProperties.POWERED) ? 14 : 0));
 	}
 
 	@Override
@@ -49,11 +46,11 @@ public class MetalInfuserBlock extends Block
 			BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit
 	)
 	{
-		if(!world.isClientSide)
+		if (!world.isClientSide)
 		{
 			TileEntity tileEntity = world.getBlockEntity(pos);
 
-			if(tileEntity instanceof MetalInfuserTile)
+			if (tileEntity instanceof MetalInfuserTile)
 				NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, tileEntity.getBlockPos());
 			else
 				throw new IllegalStateException("Our named container provider is missing!");
@@ -66,9 +63,7 @@ public class MetalInfuserBlock extends Block
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
-		BlockState state = defaultBlockState()
-				.setValue(BlockStateProperties.FACING,context.getHorizontalDirection().getOpposite())
-				.setValue(BlockStateProperties.POWERED, false);
+		BlockState state = defaultBlockState().setValue(BlockStateProperties.FACING, context.getHorizontalDirection().getOpposite()).setValue(BlockStateProperties.POWERED, false);
 		return state;
 	}
 

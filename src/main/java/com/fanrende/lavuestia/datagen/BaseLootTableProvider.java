@@ -44,25 +44,13 @@ public abstract class BaseLootTableProvider extends LootTableProvider
 		for (String tag : tags)
 			nbtBuilder.copy(tag, "BlockEntityTag." + tag, CopyNbt.Action.REPLACE);
 
-		LootPool.Builder builder = LootPool.lootPool()
-				.name(name)
-				.setRolls(ConstantRange.exactly(1))
-				.add(ItemLootEntry.lootTableItem(block)
-						.apply(CopyName.copyName(CopyName.Source.BLOCK_ENTITY))
-						.apply(nbtBuilder)
-						.apply(SetContents.setContents()
-								.withEntry(DynamicLootEntry.dynamicEntry(new ResourceLocation("minecraft",
-										"contents"
-								)))));
+		LootPool.Builder builder = LootPool.lootPool().name(name).setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(block).apply(CopyName.copyName(CopyName.Source.BLOCK_ENTITY)).apply(nbtBuilder).apply(SetContents.setContents().withEntry(DynamicLootEntry.dynamicEntry(new ResourceLocation("minecraft", "contents")))));
 		return LootTable.lootTable().withPool(builder);
 	}
 
 	protected LootTable.Builder createSelfDropTable(String name, Block block)
 	{
-		LootPool.Builder builder = LootPool.lootPool()
-				.name(name)
-				.setRolls(ConstantRange.exactly(1))
-				.add(ItemLootEntry.lootTableItem(block));
+		LootPool.Builder builder = LootPool.lootPool().name(name).setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(block));
 		return LootTable.lootTable().withPool(builder);
 	}
 
@@ -74,9 +62,7 @@ public abstract class BaseLootTableProvider extends LootTableProvider
 		Map<ResourceLocation, LootTable> tables = new HashMap<>();
 		for (Map.Entry<Block, LootTable.Builder> entry : lootTables.entrySet())
 		{
-			tables.put(entry.getKey().getLootTable(),
-					entry.getValue().setParamSet(LootParameterSets.BLOCK).build()
-			);
+			tables.put(entry.getKey().getLootTable(), entry.getValue().setParamSet(LootParameterSets.BLOCK).build());
 		}
 		writeTables(cache, tables);
 	}

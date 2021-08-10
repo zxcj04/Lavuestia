@@ -175,9 +175,7 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 			int energy = super.receiveEnergy(maxReceive, simulate);
 			if (!simulate)
 			{
-				this.stack.getOrCreateTagElement("BlockEntityTag")
-						.getCompound("energy")
-						.putInt("energy", getEnergyStored());
+				this.stack.getOrCreateTagElement("BlockEntityTag").getCompound("energy").putInt("energy", getEnergyStored());
 			}
 			return energy;
 		}
@@ -188,9 +186,7 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 			int energy = super.extractEnergy(maxExtract, simulate);
 			if (!simulate)
 			{
-				this.stack.getOrCreateTagElement("BlockEntityTag")
-						.getCompound("energy")
-						.putInt("energy", getEnergyStored());
+				this.stack.getOrCreateTagElement("BlockEntityTag").getCompound("energy").putInt("energy", getEnergyStored());
 			}
 			return energy;
 		}

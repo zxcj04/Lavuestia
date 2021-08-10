@@ -37,11 +37,9 @@ public class Registration
 	public static final RegistryObject<MetalInfuserBlock> METALINFUSER_BLOCK = BLOCKS.register("metal_infuser_block", MetalInfuserBlock::new);
 	public static final RegistryObject<BlockItem> METALINFUSER_BLOCK_ITEM = ITEMS.register("metal_infuser_block", () -> new BlockItem(METALINFUSER_BLOCK.get(), new Item.Properties().tab(ModSetup.ITEM_GROUP)));
 	public static final RegistryObject<TileEntityType<MetalInfuserTile>> METALINFUSER_BLOCK_TILE = TILES.register("metal_infuser_block", () -> TileEntityType.Builder.of(MetalInfuserTile::new, METALINFUSER_BLOCK.get()).build(null));
-	public static final RegistryObject<ContainerType<MetalInfuserContainer>> METALINFUSER_BLOCK_CONTAINER = CONTAINERS.register("metal_infuser_block",
-			() -> IForgeContainerType.create((windowId, inv, data) ->
-			{
-				BlockPos pos = data.readBlockPos();
-				return new MetalInfuserContainer(windowId, inv.player.getCommandSenderWorld(), pos, inv);
-			})
-	);
+	public static final RegistryObject<ContainerType<MetalInfuserContainer>> METALINFUSER_BLOCK_CONTAINER = CONTAINERS.register("metal_infuser_block", () -> IForgeContainerType.create((windowId, inv, data) ->
+	{
+		BlockPos pos = data.readBlockPos();
+		return new MetalInfuserContainer(windowId, inv.player.getCommandSenderWorld(), pos, inv);
+	}));
 }

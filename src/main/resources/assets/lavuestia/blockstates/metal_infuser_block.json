@@ -1,50 +1,50 @@
 {
-  "variants": {
-    "facing=down,powered=false": {
-      "model": "lavuestia:block/metal_infuser_block",
-      "x": 90
-    },
-    "facing=up,powered=false": {
-      "model": "lavuestia:block/metal_infuser_block",
-      "x": -90
-    },
-    "facing=north,powered=false": {
-      "model": "lavuestia:block/metal_infuser_block"
-    },
-    "facing=south,powered=false": {
-      "model": "lavuestia:block/metal_infuser_block",
-      "y": 180
-    },
-    "facing=west,powered=false": {
-      "model": "lavuestia:block/metal_infuser_block",
-      "y": 270
-    },
-    "facing=east,powered=false": {
-      "model": "lavuestia:block/metal_infuser_block",
-      "y": 90
-    },
-    "facing=down,powered=true": {
-      "model": "lavuestia:block/metal_infuser_block_powered",
-      "x": 90
-    },
-    "facing=up,powered=true": {
-      "model": "lavuestia:block/metal_infuser_block_powered",
-      "x": -90
-    },
-    "facing=north,powered=true": {
-      "model": "lavuestia:block/metal_infuser_block_powered"
-    },
-    "facing=south,powered=true": {
-      "model": "lavuestia:block/metal_infuser_block_powered",
-      "y": 180
-    },
-    "facing=west,powered=true": {
-      "model": "lavuestia:block/metal_infuser_block_powered",
-      "y": 270
-    },
-    "facing=east,powered=true": {
-      "model": "lavuestia:block/metal_infuser_block_powered",
-      "y": 90
-    }
-  }
+	"variants": {
+		"facing=down,powered=false": {
+			"model": "lavuestia:block/metal_infuser_block",
+			"x": 90
+		},
+		"facing=up,powered=false": {
+			"model": "lavuestia:block/metal_infuser_block",
+			"x": -90
+		},
+		"facing=north,powered=false": {
+			"model": "lavuestia:block/metal_infuser_block"
+		},
+		"facing=south,powered=false": {
+			"model": "lavuestia:block/metal_infuser_block",
+			"y": 180
+		},
+		"facing=west,powered=false": {
+			"model": "lavuestia:block/metal_infuser_block",
+			"y": 270
+		},
+		"facing=east,powered=false": {
+			"model": "lavuestia:block/metal_infuser_block",
+			"y": 90
+		},
+		"facing=down,powered=true": {
+			"model": "lavuestia:block/metal_infuser_block_powered",
+			"x": 90
+		},
+		"facing=up,powered=true": {
+			"model": "lavuestia:block/metal_infuser_block_powered",
+			"x": -90
+		},
+		"facing=north,powered=true": {
+			"model": "lavuestia:block/metal_infuser_block_powered"
+		},
+		"facing=south,powered=true": {
+			"model": "lavuestia:block/metal_infuser_block_powered",
+			"y": 180
+		},
+		"facing=west,powered=true": {
+			"model": "lavuestia:block/metal_infuser_block_powered",
+			"y": 270
+		},
+		"facing=east,powered=true": {
+			"model": "lavuestia:block/metal_infuser_block_powered",
+			"y": 90
+		}
+	}
 }

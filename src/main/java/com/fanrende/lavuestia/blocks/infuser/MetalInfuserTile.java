@@ -47,10 +47,10 @@ public class MetalInfuserTile extends TileEntity implements ITickableTileEntity,
 	@Override
 	public void tick()
 	{
-		if(counter > 0)
+		if (counter > 0)
 			counter--;
 
-		if(counter <= 0)
+		if (counter <= 0)
 		{
 			counter = 100;
 
@@ -99,7 +99,7 @@ public class MetalInfuserTile extends TileEntity implements ITickableTileEntity,
 			@Override
 			public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
 			{
-				if(slot == 1)
+				if (slot == 1)
 					return stack;
 
 				return super.insertItem(slot, stack, simulate);
@@ -121,7 +121,7 @@ public class MetalInfuserTile extends TileEntity implements ITickableTileEntity,
 			@Override
 			public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
 			{
-				if(slot == 1)
+				if (slot == 1)
 					return stack;
 
 				return super.insertItem(slot, stack, simulate);
@@ -131,7 +131,7 @@ public class MetalInfuserTile extends TileEntity implements ITickableTileEntity,
 			@Override
 			public ItemStack extractItem(int slot, int amount, boolean simulate)
 			{
-				if(slot == 0)
+				if (slot == 0)
 					return ItemStack.EMPTY;
 
 				return super.extractItem(slot, amount, simulate);
@@ -148,9 +148,9 @@ public class MetalInfuserTile extends TileEntity implements ITickableTileEntity,
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
 	{
-		if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return itemAutomationLazy.cast();
-		if(cap == CapabilityEnergy.ENERGY)
+		if (cap == CapabilityEnergy.ENERGY)
 			return energyLazy.cast();
 
 		return super.getCapability(cap, side);
