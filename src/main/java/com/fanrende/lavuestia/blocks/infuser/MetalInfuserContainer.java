@@ -33,10 +33,13 @@ public class MetalInfuserContainer extends Container
 		this.tileEntity = world.getBlockEntity(pos);
 		this.playerInventory = new InvWrapper(playerInventory);
 
-		MetalInfuserTile tile = (MetalInfuserTile) tileEntity;
+		if(tileEntity instanceof MetalInfuserTile)
+		{
+			MetalInfuserTile tile = (MetalInfuserTile) tileEntity;
 
-		addSlot(new SlotItemHandler(tile.getItemHandler(), 0, 64, 24));
-		addSlot(new SlotItemHandler(tile.getItemHandler(), 1, 100, 24));
+			addSlot(new SlotItemHandler(tile.getItemHandler(), 0, 64, 24));
+			addSlot(new SlotItemHandler(tile.getItemHandler(), 1, 100, 24));
+		}
 
 		playerInvIndexStart = this.slots.size();
 		playerInvIndexEnd = playerInvIndexStart + 36;
